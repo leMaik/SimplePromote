@@ -1,6 +1,7 @@
 package de.craften.plugins.simplepromote;
 
 import net.milkbowl.vault.economy.Economy;
+import net.milkbowl.vault.economy.EconomyResponse;
 import net.milkbowl.vault.permission.Permission;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -22,10 +23,16 @@ public class Promotion {
     }
 
     public boolean promote(Player player) {
+        Economy economy = Bukkit.getServicesManager().getRegistration(Economy.class).getProvider();
         Permission permissions = Bukkit.getServicesManager().getRegistration(Permission.class).getProvider();
         if (!permissions.playerInGroup(player, group) && (requiredGroup == null || permissions.playerInGroup(player, requiredGroup))) {
-            permissions.playerRemoveGroup(player, requiredGroup);
-            permissions.playerAddGroup(player, group);
+            EconomyResponse response = economy.withdrawPlayer(player, cost);
+            if (response.transactionSuccess()) {
+                permissions.playerRemoveGroup(player, requiredGroup);
+                permissions.playerAddGroup(player, group);
+            } else {
+                player.sendMessage(response.errorMessage);
+            }
             return true;
         }
         return false;

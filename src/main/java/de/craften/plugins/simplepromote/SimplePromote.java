@@ -1,5 +1,8 @@
 package de.craften.plugins.simplepromote;
 
+import net.milkbowl.vault.economy.Economy;
+import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -50,8 +53,15 @@ public class SimplePromote extends JavaPlugin {
                 }
                 ((Player) sender).removeMetadata(METADATA_PROMOTING, this);
             } else {
+                Economy economy = Bukkit.getServicesManager().getRegistration(Economy.class).getProvider();
                 if (nextPromotion != null) {
-                    sender.sendMessage("You can promote to " + nextPromotion.getName() + " for " + nextPromotion.getCostString() + ". Use '/" + label + " confirm' to continue.");
+                    if (economy.has((OfflinePlayer) sender, nextPromotion.getCost())) {
+                        sender.sendMessage("You can promote to " + nextPromotion.getName() + " for " + nextPromotion.getCostString() + ". Use '/" + label + " confirm' to continue.");
+                    } else {
+                        sender.sendMessage("The next rank is " + nextPromotion.getName() + ", but you don't have enough money to promote. You need " + nextPromotion.getCostString() + ".");
+                    }
+                } else {
+                    sender.sendMessage("Sorry, you can't promote.");
                 }
                 ((Player) sender).setMetadata(METADATA_PROMOTING, new FixedMetadataValue(this, true));
             }
