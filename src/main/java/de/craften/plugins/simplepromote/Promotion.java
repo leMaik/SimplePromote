@@ -1,0 +1,51 @@
+package de.craften.plugins.simplepromote;
+
+import net.milkbowl.vault.economy.Economy;
+import net.milkbowl.vault.permission.Permission;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+
+/**
+ * A promotion.
+ */
+public class Promotion {
+    private final String name;
+    private final double cost;
+    private final String group;
+    private final String requiredGroup;
+
+    public Promotion(String name, double cost, String group, String requiredGroup) {
+        this.name = name;
+        this.cost = cost;
+        this.group = group;
+        this.requiredGroup = requiredGroup;
+    }
+
+    public boolean promote(Player player) {
+        Permission permissions = Bukkit.getServicesManager().getRegistration(Permission.class).getProvider();
+        if (!permissions.playerInGroup(player, group) && (requiredGroup == null || permissions.playerInGroup(player, requiredGroup))) {
+            permissions.playerRemoveGroup(player, requiredGroup);
+            permissions.playerAddGroup(player, group);
+            return true;
+        }
+        return false;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getCost() {
+        return cost;
+    }
+
+    public String getCostString() {
+        Economy economy = Bukkit.getServicesManager().getRegistration(Economy.class).getProvider();
+        return economy.format(cost);
+    }
+
+    public boolean isPromoted(Player player) {
+        Permission permissions = Bukkit.getServicesManager().getRegistration(Permission.class).getProvider();
+        return permissions.playerInGroup(player, group);
+    }
+}

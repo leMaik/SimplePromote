@@ -1,0 +1,14 @@
+name: SimplePromote
+main: de.craften.plugins.simplepromote.SimplePromote
+version: VERSION
+depend: [Vault]
+commands:
+  promote:
+    permission: simplepromote.promote
+    description: Promote to a higher rank.
+    usage: /promote
+    aliases: [uprank]
+permissions:
+  simplepromote.promote:
+    default: true
+    description: Permission to use the /promote command.
