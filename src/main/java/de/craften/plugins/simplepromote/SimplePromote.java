@@ -42,24 +42,24 @@ public class SimplePromote extends JavaPlugin {
             if (((Player) sender).hasMetadata(METADATA_PROMOTING) && args.length == 1 && args[0].equalsIgnoreCase("confirm")) {
                 if (nextPromotion != null) {
                     if (nextPromotion.promote((Player) sender)) {
-                        sender.sendMessage("Congratulations, you promoted to " + nextPromotion.getName());
+                        sender.sendMessage("Congratulations, you were promoted to " + nextPromotion.getName());
                     } else {
-                        sender.sendMessage("Sorry, promoting failed.");
+                        sender.sendMessage("Sorry, you could not be promoted.");
                     }
                 } else {
-                    sender.sendMessage("Sorry, you can't promote.");
+                    sender.sendMessage("Sorry, you can't be promoted.");
                 }
                 ((Player) sender).removeMetadata(METADATA_PROMOTING, this);
             } else {
                 Economy economy = Bukkit.getServicesManager().getRegistration(Economy.class).getProvider();
                 if (nextPromotion != null) {
                     if (economy.has((OfflinePlayer) sender, nextPromotion.getCost())) {
-                        sender.sendMessage("You can promote to " + nextPromotion.getName() + " for " + nextPromotion.getCostString() + ". Use '/" + label + " confirm' to continue.");
+                        sender.sendMessage("You can be promoted to " + nextPromotion.getName() + " for " + nextPromotion.getCostString() + ". Use '/" + label + " confirm' to continue.");
                     } else {
-                        sender.sendMessage("The next rank is " + nextPromotion.getName() + ", but you don't have enough money to promote. You need " + nextPromotion.getCostString() + ".");
+                        sender.sendMessage("The next rank is " + nextPromotion.getName() + ", but you don't have enough money to be promoted. You need " + nextPromotion.getCostString() + ".");
                     }
                 } else {
-                    sender.sendMessage("Sorry, you can't promote.");
+                    sender.sendMessage("Sorry, you can't be promoted.");
                 }
                 ((Player) sender).setMetadata(METADATA_PROMOTING, new FixedMetadataValue(this, true));
             }
