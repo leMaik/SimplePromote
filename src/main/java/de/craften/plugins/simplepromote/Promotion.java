@@ -55,4 +55,9 @@ public class Promotion {
         Permission permissions = Bukkit.getServicesManager().getRegistration(Permission.class).getProvider();
         return permissions.playerInGroup(player, group);
     }
+
+    public boolean canPromote(Player player) {
+        Permission permissions = Bukkit.getServicesManager().getRegistration(Permission.class).getProvider();
+        return permissions.playerInGroup(player, requiredGroup) && !permissions.playerInGroup(player, group);
+    }
 }

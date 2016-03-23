@@ -21,10 +21,10 @@ ranks:
   - name: Rich person
     cost: 1000
     group: promotion.rich
+    requires: promotion.donator
 ```
-Note that ranks can only be upgraded in
-the same order that they are specified in the configuration. I.e. you can only become a _Rich person_ if
-you already are a _Donator_ and pay another 1000 bucks.
+Note that every group specified with `requires` may only have one next rank to promote to. If multiple possibilities
+are configured, the last entry is used.
 
 ## Commands and permissions
 

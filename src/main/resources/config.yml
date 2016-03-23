@@ -5,3 +5,4 @@ ranks:
   - name: Rich person
     cost: 1000
     group: promotion.rich
+    requires: promotion.donator

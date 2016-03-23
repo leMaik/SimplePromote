@@ -25,15 +25,13 @@ public class SimplePromote extends JavaPlugin {
         saveDefaultConfig();
         promotions = new ArrayList<>();
 
-        String previousGroup = null;
         for (Map promotionConfig : getConfig().getMapList("ranks")) {
             promotions.add(new Promotion(
                     promotionConfig.get("name").toString(),
                     Double.parseDouble(promotionConfig.get("cost").toString()),
                     promotionConfig.get("group").toString(),
-                    previousGroup
+                    promotionConfig.containsKey("requires") ? promotionConfig.get("requires").toString() : null
             ));
-            previousGroup = promotionConfig.get("group").toString();
         }
     }
 
@@ -72,7 +70,7 @@ public class SimplePromote extends JavaPlugin {
 
     private Promotion getNextPromotion(Player player) {
         for (Promotion promotion : promotions) {
-            if (!promotion.isPromoted(player)) {
+            if (promotion.canPromote(player)) {
                 return promotion;
             }
         }
