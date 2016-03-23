@@ -7,7 +7,7 @@ commands:
     permission: simplepromote.promote
     description: Promote to a higher rank.
     usage: /promote
-    aliases: [uprank]
+    aliases: [uprank, rankup]
 permissions:
   simplepromote.promote:
     default: true

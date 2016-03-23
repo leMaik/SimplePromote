@@ -32,6 +32,7 @@ are configured, the last entry is used.
 |-------------|----------------------------------|-------------------------------------|
 | `/promote`  | `simplepromote.promote` (`true`) | Promote to the next available rank. |
 | `/uprank`   | `simplepromote.promote` (`true`) | _alias for `/promote`_              |
+| `/rankup`   | `simplepromote.promote` (`true`) | _another alias for `/promote`_      |
 
 ## License
 SimplePromote is licensed under the MIT license, see the [license file][license].
