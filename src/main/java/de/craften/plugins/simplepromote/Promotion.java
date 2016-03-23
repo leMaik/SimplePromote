@@ -30,10 +30,10 @@ public class Promotion {
             if (response.transactionSuccess()) {
                 permissions.playerAddGroup(player, group);
                 permissions.playerRemoveGroup(player, requiredGroup);
+                return true;
             } else {
                 player.sendMessage(response.errorMessage);
             }
-            return true;
         }
         return false;
     }
