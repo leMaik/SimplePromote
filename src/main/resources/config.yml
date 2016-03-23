@@ -6,3 +6,4 @@ ranks:
     cost: 1000
     group: promotion.rich
     requires: promotion.donator
+broadcastPromotedPlayers: true

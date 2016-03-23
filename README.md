@@ -10,7 +10,7 @@ support [Vault][vault].
 [ci]: https://ci.wertarbyte.com/job/SimplePromote/lastStableBuild/
 [vault]: http://dev.bukkit.org/bukkit-plugins/vault/
 
-The default config contains two ranks that players can promote to.
+The default config contains two ranks that players can be promoted to.
 
 ```yaml
 news:
@@ -22,6 +22,7 @@ ranks:
     cost: 1000
     group: promotion.rich
     requires: promotion.donator
+broadcastPromotedPlayers: true # whether to broadcast when a player was promoted
 ```
 Note that every group specified with `requires` may only have one next rank to promote to. If multiple possibilities
 are configured, the last entry is used.

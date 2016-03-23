@@ -43,6 +43,9 @@ public class SimplePromote extends JavaPlugin {
                 if (nextPromotion != null) {
                     if (nextPromotion.promote((Player) sender)) {
                         sender.sendMessage("Congratulations, you were promoted to " + nextPromotion.getName());
+                        if (getConfig().getBoolean("broadcastPromotedPlayers", true)) {
+                            getServer().broadcastMessage(((Player) sender).getDisplayName() + " was just promoted to " + nextPromotion.getName() + "!");
+                        }
                     } else {
                         sender.sendMessage("Sorry, you could not be promoted.");
                     }
