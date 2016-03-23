@@ -28,8 +28,8 @@ public class Promotion {
         if (!permissions.playerInGroup(player, group) && (requiredGroup == null || permissions.playerInGroup(player, requiredGroup))) {
             EconomyResponse response = economy.withdrawPlayer(player, cost);
             if (response.transactionSuccess()) {
-                permissions.playerRemoveGroup(player, requiredGroup);
                 permissions.playerAddGroup(player, group);
+                permissions.playerRemoveGroup(player, requiredGroup);
             } else {
                 player.sendMessage(response.errorMessage);
             }
